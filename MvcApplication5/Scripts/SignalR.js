@@ -13,12 +13,20 @@
     $('#message').focus();
     // Start the connection.
     $.connection.hub.start().done(function () {
+        chat.server.joinRoom($('#cars').val());
+
         $('#sendmessage').click(function () {
             // Call the Send method on the hub. 
-            chat.server.send($('#displayname').val(), $('#message').val());
+            chat.server.send($('#displayname').val(), $('#message').val(), $('#cars').val());
             // Clear text box and reset focus for next comment. 
             $('#message').val('').focus();
         });
+
+        $('#cars').change(function () {
+            // Join the group. 
+            chat.server.joinRoom($('#cars').val());
+        });
+
     });
 });
 
